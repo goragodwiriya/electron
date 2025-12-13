@@ -1,0 +1,743 @@
+/* Thai Election Hub - CSS Styles */
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #111827;
+  background-color: #FFFFFF;
+}
+/* Container */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+/* Typography */
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.card-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.hero-subtitle,
+.section-subtitle {
+  font-size: 20px;
+  color: #6B7280;
+  text-align: center;
+  margin-bottom: 48px;
+}
+/* Navigation */
+.nav {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+.nav-links a {
+  color: #6B7280;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover {
+  color: #111827;
+}
+/* Hero Section */
+.hero {
+  padding: 128px 0 96px;
+  background-color: #FFFFFF;
+}
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+/* Year Selector */
+.year-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.year-label {
+  font-size: 16px;
+  color: #6B7280;
+  font-weight: 500;
+}
+.year-buttons {
+  display: flex;
+  gap: 8px;
+}
+.year-btn {
+  padding: 10px 20px;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  color: #6B7280;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.year-btn:hover {
+  border-color: #111827;
+  color: #111827;
+}
+.year-btn.active {
+  background-color: #111827;
+  border-color: #111827;
+  color: #FFFFFF;
+}
+/* Stats Banner */
+.stats-banner {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  background-color: #F8F9FA;
+  padding: 24px 32px;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.stat-label {
+  font-size: 14px;
+  color: #6B7280;
+  font-weight: 500;
+}
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+}
+/* Sections */
+.results-section,
+.parties-section,
+.comparison-section {
+  padding: 96px 0;
+}
+.results-section {
+  background-color: #F8F9FA;
+}
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+/* Cards */
+.card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+/* Parliament Chart */
+.parliament-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+#parliamentCanvas {
+  max-width: 300px;
+  max-height: 300px;
+}
+/* Chart Legend */
+.chart-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+}
+.legend-text {
+  font-size: 14px;
+  color: #374151;
+}
+/* Vote Bars */
+.vote-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.vote-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.vote-bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.party-name {
+  font-weight: 500;
+  color: #374151;
+}
+.vote-percentage {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.vote-bar-track {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  gap: 5px;
+  background-color: #F3F4F6;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.vote-bar-fill {
+  height: 100%;
+  min-width: 10px;
+  transition: width 0.3s ease;
+}
+/* Party Performance Grid */
+.party-performance {
+  margin-top: 48px;
+}
+.party-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.party-stat-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s;
+}
+.party-stat-card:hover {
+  transform: translateY(-4px);
+}
+.party-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.party-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+.party-info h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.party-leader {
+  font-size: 14px;
+  color: #6B7280;
+}
+.party-metrics {
+  display: flex;
+  justify-content: space-between;
+  font-variant-numeric: tabular-nums;
+}
+.metric {
+  text-align: center;
+}
+.metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  display: block;
+}
+.metric-label {
+  font-size: 12px;
+  color: #6B7280;
+  font-weight: 500;
+}
+/* Parties Grid */
+.parties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 32px;
+}
+.party-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 32px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.party-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.party-card.dissolved {
+  opacity: 0.7;
+  position: relative;
+}
+.dissolved-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: #F3F4F6;
+  color: #6B7280;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.policy-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.policy-tag {
+  background-color: #F3F4F6;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+/* Comparison Table */
+.comparison-table-container {
+  overflow-x: auto;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.comparison-table th,
+.comparison-table td {
+  padding: 24px;
+  text-align: left;
+  border-bottom: 1px solid #E5E7EB;
+}
+.comparison-table th {
+  background-color: #F8F9FA;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.comparison-table tbody tr:nth-child(even) {
+  background-color: #F9FAFB;
+}
+.comparison-table tbody tr:hover {
+  background-color: #F3F4F6;
+}
+.party-column {
+  min-width: 200px;
+}
+.policy-cell {
+  min-width: 300px;
+}
+.policy-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.status-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+.status-support {
+  background-color: #059669;
+}
+.status-oppose {
+  background-color: #DC2626;
+}
+.status-neutral {
+  background-color: #D97706;
+}
+/* Footer */
+.footer {
+  background-color: #111827;
+  color: #FFFFFF;
+  padding: 48px 0 24px;
+}
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.footer-section h3 {
+  color: #FFFFFF;
+  margin-bottom: 16px;
+}
+.footer-section ul {
+  list-style: none;
+}
+.footer-section li {
+  margin-bottom: 8px;
+  color: #D1D5DB;
+}
+.footer-section a {
+  color: #60A5FA;
+  text-decoration: none;
+}
+.footer-section a:hover {
+  text-decoration: underline;
+}
+.footer-section p {
+  color: #D1D5DB;
+  line-height: 1.6;
+}
+.footer-bottom {
+  border-top: 1px solid #374151;
+  padding-top: 24px;
+  text-align: center;
+  color: #9CA3AF;
+}
+/* Election Map Section */
+.map-section {
+  padding: 96px 0;
+  background-color: #FFFFFF;
+}
+.map-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.map-wrapper {
+  position: relative;
+  background-color: #F8F9FA;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 500px;
+}
+.thailand-map {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.thailand-map svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+/* Map Tooltip */
+.map-tooltip {
+  position: absolute;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 100;
+  min-width: 160px;
+}
+.tooltip-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.tooltip-party {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.tooltip-stats {
+  font-size: 13px;
+  color: #6B7280;
+}
+/* Province Panel */
+.province-panel {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  max-height: 766px;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #E5E7EB;
+}
+.panel-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+.panel-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6B7280;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.panel-close:hover {
+  color: #111827;
+}
+.panel-content {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.panel-placeholder {
+  color: #6B7280;
+  text-align: center;
+  padding: 40px 0;
+}
+.loading {
+  text-align: center;
+  color: #6B7280;
+  padding: 40px 0;
+}
+.panel-error {
+  text-align: center;
+  color: #DC2626;
+  padding: 40px 0;
+}
+.no-districts {
+  text-align: center;
+  color: #6B7280;
+  padding: 20px 0;
+  font-style: italic;
+}
+/* Province Summary */
+.province-summary {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E5E7EB;
+}
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.summary-label {
+  font-size: 13px;
+  color: #6B7280;
+}
+.summary-value {
+  font-size: 18px;
+  font-weight: 600;
+}
+/* District Table */
+.district-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.district-table th,
+.district-table td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid #E5E7EB;
+}
+.district-table th {
+  font-weight: 600;
+  color: #6B7280;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.district-table tbody tr:hover {
+  background-color: #F9FAFB;
+}
+.district-num {
+  font-weight: 600;
+  color: #374151;
+  width: 40px;
+}
+.district-winner {
+  font-weight: 500;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.district-party {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.party-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.district-votes {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+/* Map Legend */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px;
+  background-color: #F8F9FA;
+  border-radius: 8px;
+}
+.map-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.map-legend .legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+.map-legend .legend-text {
+  font-size: 14px;
+  color: #374151;
+}
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-banner {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .map-container {
+    grid-template-columns: 1fr;
+  }
+  .province-panel {
+    max-height: 400px;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  .hero-title {
+    font-size: 36px;
+  }
+  .section-title {
+    font-size: 28px;
+  }
+  .hero-subtitle,
+  .section-subtitle {
+    font-size: 18px;
+  }
+  .nav-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .nav-links {
+    gap: 16px;
+  }
+  .parties-grid {
+    grid-template-columns: 1fr;
+  }
+  .party-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .comparison-table th,
+  .comparison-table td {
+    padding: 16px 12px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .hero {
+    padding: 64px 0 48px;
+  }
+  .results-section,
+  .parties-section,
+  .comparison-section {
+    padding: 48px 0;
+  }
+  .card {
+    padding: 24px;
+  }
+  .hero-title {
+    font-size: 28px;
+  }
+  .stats-banner {
+    padding: 16px;
+  }
+  .stat-value {
+    font-size: 20px;
+  }
+}

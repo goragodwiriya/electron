@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ศูนย์ข้อมูลการเลือกตั้งไทย | Thai Election & Policy Data Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <h1 class="logo">ศูนย์ข้อมูลการเมืองไทย</h1>
+                <div class="nav-links">
+                    <a href="#results">ผลเลือกตั้ง</a>
+                    <a href="#map">แผนที่</a>
+                    <a href="#parties">พรรคการเมือง</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">ศูนย์ข้อมูลการเลือกตั้งและนโยบายไทย</h1>
+                <p class="hero-subtitle">สำรวจผลการเลือกตั้ง เปรียบเทียบนโยบาย และติดตามการเคลื่อนไหวทางการเมือง</p>
+
+                <!-- Year Selector -->
+                <div class="year-selector">
+                    <span class="year-label">เลือกปีเลือกตั้ง:</span>
+                    <div class="year-buttons" id="yearButtons">
+                        <button class="year-btn active" data-year="2566">พ.ศ. 2566</button>
+                        <button class="year-btn" data-year="2562">พ.ศ. 2562</button>
+                        <button class="year-btn" data-year="2554">พ.ศ. 2554</button>
+                    </div>
+                </div>
+
+                <div class="stats-banner" id="statsBanner">
+                    <div class="stat-item">
+                        <span class="stat-label">อัตราการมีส่วนร่วม:</span>
+                        <span class="stat-value">75.64%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">คะแนนเสียงทั้งหมด:</span>
+                        <span class="stat-value">39+ ล้าน</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">วันเลือกตั้ง:</span>
+                        <span class="stat-value">14 พ.ค. 2566</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Election Results Dashboard -->
+    <section id="results" class="results-section">
+        <div class="container">
+            <h2 class="section-title" id="resultsTitle">ผลการเลือกตั้ง พ.ศ. 2566</h2>
+            <p class="section-subtitle" id="resultsSubtitle">ข้อมูลการเลือกตั้งสมาชิกสภาผู้แทนราษฎร 14 พฤษภาคม 2566</p>
+
+            <div class="dashboard-grid">
+                <!-- Parliament Visualization -->
+                <div class="card parliament-card">
+                    <h3 class="card-title">สัดส่วนที่นั่งในสภา</h3>
+                    <div class="parliament-chart" id="parliamentChart">
+                        <canvas id="parliamentCanvas"></canvas>
+                    </div>
+                    <div class="chart-legend" id="chartLegend"></div>
+                </div>
+
+                <!-- Vote Distribution -->
+                <div class="card votes-card">
+                    <h3 class="card-title">การกระจายคะแนนเสียง</h3>
+                    <div class="vote-bars" id="voteBars"></div>
+                </div>
+            </div>
+
+            <!-- Party Performance Grid -->
+            <div class="party-performance">
+                <h3 class="card-title">ผลการดำเนินงานของพรรค</h3>
+                <div class="party-stats-grid" id="partyStatsGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Election Map -->
+    <section id="map" class="map-section">
+        <div class="container">
+            <h2 class="section-title">แผนที่ผลการเลือกตั้ง</h2>
+            <p class="section-subtitle">คลิกจังหวัดเพื่อดูรายละเอียดแต่ละเขต</p>
+
+            <div class="map-container">
+                <!-- Thailand Map -->
+                <div class="map-wrapper" id="mapWrapper">
+                    <div id="thailandMap" class="thailand-map"></div>
+
+                    <!-- Tooltip -->
+                    <div id="mapTooltip" class="map-tooltip" style="display: none;">
+                        <div class="tooltip-title" id="tooltipTitle">กรุงเทพมหานคร</div>
+                        <div class="tooltip-party" id="tooltipParty">พรรคก้าวไกล</div>
+                        <div class="tooltip-stats" id="tooltipStats">32/42 เขต</div>
+                    </div>
+                </div>
+
+                <!-- Province Details Panel -->
+                <div class="province-panel" id="provincePanel">
+                    <div class="panel-header">
+                        <h3 id="panelTitle">เลือกจังหวัดบนแผนที่</h3>
+                        <button class="panel-close" id="panelClose">&times;</button>
+                    </div>
+                    <div class="panel-content" id="panelContent">
+                        <p class="panel-placeholder">คลิกจังหวัดบนแผนที่เพื่อดูผลการเลือกตั้งแต่ละเขต</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Legend -->
+            <div class="map-legend" id="mapLegend"></div>
+        </div>
+    </section>
+
+    <!-- Party & Policy Explorer -->
+    <section id="parties" class="parties-section">
+        <div class="container">
+            <h2 class="section-title">พรรคการเมืองและนโยบาย</h2>
+            <p class="section-subtitle">ข้อมูลพรรคการเมืองหลัก นโยบาย และผู้นำ</p>
+
+            <div class="parties-grid" id="partiesGrid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ข้อมูลแหล่งที่มา</h3>
+                    <ul>
+                        <li>พรรคเพื่อไทย: <a href="https://www.ptp.or.th" target="_blank">ptp.or.th</a></li>
+                        <li>พรรคประชาธิปัตย์: <a href="https://www.democrat.or.th" target="_blank">democrat.or.th</a></li>
+                        <li>พรรคภูมิใจไทย: <a href="https://bhumjaithai.com" target="_blank">bhumjaithai.com</a></li>
+                        <li>คณะกรรมการการเลือกตั้ง: <a href="https://www.ect.go.th" target="_blank">ect.go.th</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>การใช้ข้อมูล</h3>
+                    <p>ข้อมูลทั้งหมดในเว็บไซต์นี้เป็นข้อมูลสาธารณะที่ได้จากแหล่งข้อมูลที่เชื่อถือได้ มีจุดประสงค์เพื่อการศึกษาและการรับรู้ข้อมูลสาธารณะ</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>หมายเหตุสำคัญ</h3>
+                    <ul>
+                        <li>พรรคก้าวไกลถูกยุบเมื่อวันที่ 7 สิงหาคม 2567</li>
+                        <li>ข้อมูลอัปเดตล่าสุด: 12 ธันวาคม 2568</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2568 ศูนย์ข้อมูลการเมืองไทย | พัฒนาโดย Goragod Wiriya</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data/election-data.js"></script>
+    <script src="data/map-data.js"></script>
+    <script src="script.js"></script>
+    <script src="map.js"></script>
+</body>
+</html>
