@@ -7,6 +7,88 @@
 let districtDataCache = {};
 let selectedProvinceId = null;
 
+// Province code mapping for 2569 data (English name to province code)
+const provinceCodeMap = {
+  'bangkok': 'BKK',
+  'samut-prakan': 'SPK',
+  'nonthaburi': 'NBI',
+  'pathum-thani': 'PTE',
+  'ayutthaya': 'AYA',
+  'ang-thong': 'ATG',
+  'lopburi': 'LRI',
+  'sing-buri': 'SBR',
+  'chainat': 'CNT',
+  'saraburi': 'SRI',
+  'chonburi': 'CBI',
+  'rayong': 'RYG',
+  'chanthaburi': 'CTI',
+  'trat': 'TRT',
+  'chachoengsao': 'CCO',
+  'prachinburi': 'PRI',
+  'nakhon-nayok': 'NYK',
+  'sa-kaeo': 'SKW',
+  'nakhon-ratchasima': 'NMA',
+  'buriram': 'BRM',
+  'surin': 'SRN',
+  'sisaket': 'SSK',
+  'ubon-ratchathani': 'UBN',
+  'yasothon': 'YST',
+  'chaiyaphum': 'CPM',
+  'amnat-charoen': 'ACR',
+  'bueng-kan': 'BKN',
+  'nong-bua-lam-phu': 'NBP',
+  'khon-kaen': 'KKN',
+  'udon-thani': 'UDN',
+  'loei': 'LEI',
+  'nong-khai': 'NKI',
+  'maha-sarakham': 'MKM',
+  'roi-et': 'RET',
+  'kalasin': 'KSN',
+  'sakon-nakhon': 'SNK',
+  'nakhon-phanom': 'NPM',
+  'mukdahan': 'MDH',
+  'chiang-mai': 'CMI',
+  'lamphun': 'LPN',
+  'lampang': 'LPG',
+  'uttaradit': 'UTT',
+  'phrae': 'PRE',
+  'nan': 'NAN',
+  'phayao': 'PYO',
+  'chiang-rai': 'CRI',
+  'mae-hong-son': 'MSN',
+  'nakhon-sawan': 'NSN',
+  'uthai-thani': 'UTI',
+  'kamphaeng-phet': 'KPT',
+  'tak': 'TAK',
+  'sukhothai': 'STI',
+  'phitsanulok': 'PLK',
+  'phichit': 'PCT',
+  'phetchabun': 'PNB',
+  'ratchaburi': 'RBR',
+  'kanchanaburi': 'KRI',
+  'suphan-buri': 'SPB',
+  'nakhon-pathom': 'NPT',
+  'samut-sakhon': 'SKN',
+  'samut-songkhram': 'SKM',
+  'phetchaburi': 'PBI',
+  'prachuap-khiri-khan': 'PKN',
+  'nakhon-si-thammarat': 'NST',
+  'krabi': 'KBI',
+  'phang-nga': 'PNA',
+  'phuket': 'PKT',
+  'surat-thani': 'SNI',
+  'ranong': 'RNG',
+  'chumphon': 'CPN',
+  'songkhla': 'SKA',
+  'satun': 'STN',
+  'trang': 'TRG',
+  'phatthalung': 'PLG',
+  'pattani': 'PTN',
+  'yala': 'YLA',
+  'narathiwat': 'NWT',
+  'singburi': 'SBR'
+};
+
 // Initialize map when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   loadThailandMap();
@@ -177,7 +259,13 @@ async function loadDistrictData(year, provinceId) {
     districtDataCache[year] = await response.json();
   }
 
-  return districtDataCache[year][provinceId] || null;
+  // For 2569, convert English province ID to province code
+  let lookupId = provinceId;
+  if (year === 2569 && provinceCodeMap[provinceId]) {
+    lookupId = provinceCodeMap[provinceId];
+  }
+
+  return districtDataCache[year][lookupId] || null;
 }
 
 /**
@@ -216,8 +304,34 @@ function renderDistrictDetails(districtData, mapInfo) {
         </div>
     `;
 
+  // If data is an array (2569 format)
+  if (Array.isArray(districtData) && districtData.length > 0) {
+    html += '<table class="district-table">';
+    html += '<thead><tr><th>เขต</th><th>พรรค</th><th>คะแนน</th><th>% การมาใช้สิทธิ</th></tr></thead>';
+    html += '<tbody>';
+
+    districtData.forEach(d => {
+      if (d.number === 0) return; // Skip district 0
+      const winner = d.winner;
+      if (winner) {
+        html += `
+                  <tr>
+                      <td class="district-num">${d.number}</td>
+                      <td class="district-party">
+                          <span class="party-dot" style="background-color: ${winner.partyColor}"></span>
+                          ${winner.party}
+                      </td>
+                      <td class="district-votes">${winner.votes.toLocaleString()}</td>
+                      <td class="district-num">${d.turnout.toFixed(2)}%</td>
+                  </tr>
+              `;
+      }
+    });
+
+    html += '</tbody></table>';
+  }
   // If has districts (2566, 2562)
-  if (districtData.districts && districtData.districts.length > 0) {
+  else if (districtData.districts && districtData.districts.length > 0) {
     html += '<table class="district-table">';
     html += '<thead><tr><th>เขต</th><th>ผู้ชนะ</th><th>พรรค</th><th>คะแนน</th></tr></thead>';
     html += '<tbody>';
